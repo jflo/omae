@@ -28,7 +28,7 @@ public class HomeController {
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		
-		List<String> chumNames = chummers.getAllPersonNames();
+		List<String> chumNames = chummers.getAllChummNames();
 		model.addAttribute("userCount", chumNames.size());
 		return "home";
 	}
