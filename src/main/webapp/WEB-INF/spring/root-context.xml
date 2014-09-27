@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/ldap http://www.springframework.org/schema/ldap/spring-ldap.xsd"
+	xmlns:ldap="http://www.springframework.org/schema/ldap">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+		<ldap:context-source
+          url="ldap://54.86.184.108:389"
+          base="dc=omae,dc=org"
+          username="cn=admin,dc=omae,dc=org"
+          password="8chumm5" />
+
+   <ldap:ldap-template id="ldapTemplate" />
+
+  
 </beans>
