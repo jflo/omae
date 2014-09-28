@@ -10,7 +10,7 @@ public class ChummerContextMapper implements ContextMapper<Chummer> {
 		Chummer c = new Chummer();
 		c.setUserName(context.getStringAttribute("cn"));
 		c.setEmail(context.getStringAttribute("mail"));
-
+		c.setId(context.getDn().toString());
 		return c;
 	}
 	

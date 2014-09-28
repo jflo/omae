@@ -2,13 +2,11 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>sup, omae?</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
 
-<P>  Omae serving ${userCount} chummers. </P>
+
+
 </body>
 </html>

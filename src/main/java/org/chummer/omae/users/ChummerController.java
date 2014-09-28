@@ -31,4 +31,10 @@ public class ChummerController {
 		return chumms.getChummer(ldapDN);
 	}
 	
+	@RequestMapping(value = "/chummer", method = RequestMethod.PUT)
+	public @ResponseBody Chummer updateChummer(@RequestBody Chummer chum) {
+		chumms.updateChummer(chum);		
+		return chumms.getChummer(chum.getId());
+	}
+	
 }

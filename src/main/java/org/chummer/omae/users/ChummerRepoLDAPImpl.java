@@ -5,13 +5,12 @@ import static org.springframework.ldap.query.LdapQueryBuilder.query;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttribute;
-import javax.naming.directory.BasicAttributes;
 import javax.naming.ldap.LdapName;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.core.DirContextAdapter;
+import org.springframework.ldap.core.DirContextOperations;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.support.LdapNameBuilder;
 import org.springframework.stereotype.Repository;
@@ -29,19 +28,6 @@ public class ChummerRepoLDAPImpl implements ChummerRepo {
 	public void setLdapTemplate(LdapTemplate ldapTemplate) {
 		this.ldapTemplate = ldapTemplate;
 	}	
-
-	private Attributes buildAttributes(Chummer chum) {
-		Attributes retval = new BasicAttributes();
-		
-		BasicAttribute objClassAttribs = new BasicAttribute("objectclass");
-		objClassAttribs.add("inetOrgPerson");
-		retval.put(objClassAttribs);
-		retval.put("cn", chum.getUserName());
-		retval.put("sn", "Amigo");
-		retval.put("userPassword", chum.getPassword());
-		retval.put("mail", chum.getEmail());
-		return retval;
-	}
 
 	@Override
 	public LdapName buildDn(Chummer c) {
@@ -63,6 +49,18 @@ public class ChummerRepoLDAPImpl implements ChummerRepo {
 		ctx.setAttributeValue("mail", chum.getEmail());
 		
 		ldapTemplate.bind(ctx);		
+	}
+	
+	@Override
+	public void updateChummer(Chummer chum) {
+		LdapName dn = buildDn(chum);
+		DirContextOperations ctx = ldapTemplate.lookupContext(dn);
+		ctx.setAttributeValue("cn", chum.getUserName());
+		ctx.setAttributeValue("sn", "Amigo");
+		ctx.setAttributeValue("userPassword", chum.getPassword());
+		ctx.setAttributeValue("mail", chum.getEmail());
+		ldapTemplate.modifyAttributes(ctx);
+		
 	}
 
 	public Chummer getChummer(String ldapDN) {

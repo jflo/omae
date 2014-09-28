@@ -9,6 +9,7 @@ public interface ChummerRepo {
 	public List<String> getAllChummNames();
 	public Chummer getChummer(String ldapDN);
 	public void newChummer(Chummer chum);
-	public LdapName buildDn(Chummer c);
+	public LdapName buildDn(Chummer chum);
+	public void updateChummer(Chummer chum);
 
 }
