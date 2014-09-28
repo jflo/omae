@@ -13,18 +13,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ChummerController {
 
 	@Autowired
-	ChummerRepo repo;
+	ChummerRepo chumms;
+	
+	@Autowired
+	GroupRepo groups;
 	
 	@RequestMapping(value = "/chummer", method = RequestMethod.POST)
 	public @ResponseBody Chummer newChummer(@RequestBody Chummer chum) {
-		repo.newChummer(chum);
-		Chummer retval = repo.getChummer("cn="+chum.getUserName()+",ou=Runners");
+		chumms.newChummer(chum);
+		groups.addMemberToGroup("Players", chum);
+		Chummer retval = chumms.getChummer("cn="+chum.getUserName()+",ou=Users" );
 		return retval;
 	}
 	
 	@RequestMapping(value="/chummer/{ldapDN}", method = RequestMethod.GET)
 	public @ResponseBody Chummer getChummer(@PathVariable String ldapDN ) {
-		return repo.getChummer(ldapDN);
+		return chumms.getChummer(ldapDN);
 	}
 	
 }

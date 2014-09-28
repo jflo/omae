@@ -2,6 +2,9 @@ package org.chummer.omae.users;
 
 import java.io.Serializable;
 
+import org.springframework.ldap.odm.annotations.Entry;
+
+@Entry(objectClasses = { "person" })
 public class Chummer implements Serializable{
 
 	private static final long serialVersionUID = 1L;
