@@ -33,11 +33,12 @@ public class ChummerRepoLDAPImpl implements ChummerRepo {
 		Attributes retval = new BasicAttributes();
 		
 		BasicAttribute objClassAttribs = new BasicAttribute("objectclass");
-		objClassAttribs.add("person");
+		objClassAttribs.add("inetOrgPerson");
 		retval.put(objClassAttribs);
 		retval.put("cn", chum.getUserName());
 		retval.put("sn", "Amigo");
-		retval.put("userPassword", "shadowrun");
+		retval.put("userPassword", chum.getPassword());
+		retval.put("mail", chum.getEmail());
 		return retval;
 	}
 
@@ -50,6 +51,7 @@ public class ChummerRepoLDAPImpl implements ChummerRepo {
 	@Override
 	public void newChummer(Chummer chum) {
 		LdapName newChumDn = buildDn(chum);		
+		
 		ldapTemplate.bind(newChumDn, null, buildAttributes(chum));		
 	}
 
@@ -60,7 +62,7 @@ public class ChummerRepoLDAPImpl implements ChummerRepo {
 
 	public List<Chummer> getAllChums() {
 		return ldapTemplate.search(
-				query().where("objectclass").is("person"),
+				query().where("objectclass").is("inetOrgPerson"),
 				new ChummerAttributesMapper());
 	}
 

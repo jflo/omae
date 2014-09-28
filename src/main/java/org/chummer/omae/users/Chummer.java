@@ -12,6 +12,7 @@ public class Chummer implements Serializable{
 		
 	    private String userName;
 	    private String email;
+	    private String password;
 	    		
 		public String getUserName() {
 			return userName;
@@ -24,6 +25,12 @@ public class Chummer implements Serializable{
 		}
 		public void setEmail(String email) {
 			this.email = email;
+		}
+		public String getPassword() {
+			return password;
+		}
+		public void setPassword(String password) {
+			this.password = password;
 		}
 		
 		
