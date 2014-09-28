@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/security
+                           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+	
+    <security:global-method-security secured-annotations="enabled" />
+    
+
+    <security:http auto-config="true">
+        <!-- Restrict URLs based on role -->
+        <security:intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/logoutSuccess*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        
+        <security:intercept-url pattern="/css/main.css" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+
+        <security:intercept-url pattern="/home" access="ROLE_PLAYERS" />
+
+        <!-- Override default login and logout pages -->
+        <security:form-login login-page="/login.jsp"         					 
+                             authentication-failure-url="/login.jsp?login_error=1" />
+        <security:logout logout-url="/logout" logout-success-url="/logoutSuccess.html" />
+        
+    </security:http>
+
+	<security:ldap-server url="ldap://54.86.184.108:389/dc=omae,dc=org" manager-dn="cn=admin,dc=omae,dc=org" manager-password="8chumm5"/>	
+	<security:authentication-manager>
+    	
+        <security:ldap-authentication-provider user-details-class="inetOrgPerson" 
+        		user-search-filter="cn={0},ou=Users"
+        		user-dn-pattern="cn={0},ou=Users" group-search-base="cn=Players,ou=Groups" group-search-filter="member={0}">
+    		
+			
+        </security:ldap-authentication-provider>
+    </security:authentication-manager>
+
+</beans>
