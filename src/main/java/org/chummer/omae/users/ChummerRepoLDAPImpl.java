@@ -37,9 +37,8 @@ public class ChummerRepoLDAPImpl implements ChummerRepo {
 		public Chummer mapFromAttributes(Attributes attrs)
 				throws NamingException {
 			Chummer person = new Chummer();
-			person.setUserName((String) attrs.get("uid").get());
+			person.setUserName((String) attrs.get("cn").get());
 			person.setEmail((String) attrs.get("mail").get());
-			person.setId((String) attrs.get("uidNumber").get());
 			return person;
 		}
 	}
@@ -51,8 +50,7 @@ public class ChummerRepoLDAPImpl implements ChummerRepo {
 		objClassAttribs.add("inetOrgPerson");
 		retval.put(objClassAttribs);
 		retval.put("givenName", "Shadow");
-		retval.put("sn", "Runner");
-		retval.put("uid", chum.getUserName());
+		retval.put("sn", "Runner");		
 		retval.put("cn", chum.getUserName());
 		retval.put("mail", chum.getEmail());
 		retval.put("userPassword", "shadowrun");
@@ -61,7 +59,7 @@ public class ChummerRepoLDAPImpl implements ChummerRepo {
 
 	protected LdapName buildDn(Chummer c) {
 		return LdapNameBuilder.newInstance("ou=Runners")				
-				.add("uid", c.getUserName()).build();
+				.add("cn", c.getUserName()).build();
 	}
 
 	@Override
