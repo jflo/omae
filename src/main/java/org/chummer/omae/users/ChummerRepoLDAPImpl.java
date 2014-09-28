@@ -11,6 +11,7 @@ import javax.naming.directory.BasicAttributes;
 import javax.naming.ldap.LdapName;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ldap.core.DirContextAdapter;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.support.LdapNameBuilder;
 import org.springframework.stereotype.Repository;
@@ -50,20 +51,29 @@ public class ChummerRepoLDAPImpl implements ChummerRepo {
 
 	@Override
 	public void newChummer(Chummer chum) {
-		LdapName newChumDn = buildDn(chum);		
+		LdapName newChumDn = buildDn(chum);
+		BasicAttribute objClassAttribs = new BasicAttribute("objectclass");
+		objClassAttribs.add("inetOrgPerson");
 		
-		ldapTemplate.bind(newChumDn, null, buildAttributes(chum));		
+		DirContextAdapter ctx = new DirContextAdapter(newChumDn);
+		ctx.setAttribute(objClassAttribs);
+		ctx.setAttributeValue("cn", chum.getUserName());
+		ctx.setAttributeValue("sn", "Amigo");
+		ctx.setAttributeValue("userPassword", chum.getPassword());
+		ctx.setAttributeValue("mail", chum.getEmail());
+		
+		ldapTemplate.bind(ctx);		
 	}
 
 	public Chummer getChummer(String ldapDN) {
 		return (Chummer) ldapTemplate.lookup(ldapDN,
-				new ChummerAttributesMapper());
+				new ChummerContextMapper());
 	}
 
 	public List<Chummer> getAllChums() {
 		return ldapTemplate.search(
 				query().where("objectclass").is("inetOrgPerson"),
-				new ChummerAttributesMapper());
+				new ChummerContextMapper());
 	}
 
 	@Override
