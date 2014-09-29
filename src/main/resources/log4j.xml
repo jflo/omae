@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="org.chummer.omae">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
@@ -34,6 +34,10 @@
 
 	<logger name="org.springframework.security">
 		<level value="info" />
+	</logger>
+	
+	<logger name="net.sf.saxon">
+		<level value="debug" />
 	</logger>
 	<!-- Root Logger -->
 	<root>

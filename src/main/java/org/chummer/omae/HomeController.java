@@ -1,5 +1,8 @@
 package org.chummer.omae;
 
+import java.io.IOException;
+
+import org.chummer.omae.runners.RunnerRepo;
 import org.chummer.omae.users.Chummer;
 import org.chummer.omae.users.ChummerRepo;
 import org.slf4j.Logger;
@@ -24,17 +27,22 @@ public class HomeController {
 	
 	@Autowired
 	private ChummerRepo chummers;
+	
+	@Autowired
+	private RunnerRepo runners;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
+	 * @throws IOException if we can't load a list of runners for the logged in user.
 	 */
 	@Secured("ROLE_PLAYERS")
 	@RequestMapping(value = "/home", method = {RequestMethod.GET, RequestMethod.POST})
-	public String home(Model model) {
+	public String home(Model model) throws IOException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String name = auth.getName(); 
 		Chummer chum = chummers.getChummer(chummers.buildDn(name).toString());
 		model.addAttribute("user", chum);
+		model.addAttribute("runners", runners.getRunners(name));
 		return "home";
 	}
 	
