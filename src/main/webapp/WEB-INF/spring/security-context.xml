@@ -14,11 +14,12 @@
         <!-- Restrict URLs based on role -->
         <security:intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:intercept-url pattern="/logoutSuccess*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-        
+        <security:intercept-url pattern="/reg" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/chummer/register" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:intercept-url pattern="/css/main.css" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 
-        <security:intercept-url pattern="/home" access="ROLE_PLAYERS" />
+        <security:intercept-url pattern="/**" access="ROLE_PLAYERS" />
 
         <!-- Override default login and logout pages -->
         <security:form-login login-page="/login.jsp"         					 

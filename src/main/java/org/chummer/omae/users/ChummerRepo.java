@@ -11,5 +11,6 @@ public interface ChummerRepo {
 	public void newChummer(Chummer chum);
 	public LdapName buildDn(Chummer chum);
 	public void updateChummer(Chummer chum);
+	public LdapName buildDn(String name);
 
 }

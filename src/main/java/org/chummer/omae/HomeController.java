@@ -1,13 +1,13 @@
 package org.chummer.omae;
 
-import java.util.List;
-import java.util.Locale;
-
+import org.chummer.omae.users.Chummer;
 import org.chummer.omae.users.ChummerRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,11 +29,12 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@Secured("ROLE_PLAYERS")
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		
-		List<String> chumNames = chummers.getAllChummNames();
-		model.addAttribute("userCount", chumNames.size());
+	@RequestMapping(value = "/home", method = {RequestMethod.GET, RequestMethod.POST})
+	public String home(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName(); 
+		Chummer chum = chummers.getChummer(chummers.buildDn(name).toString());
+		model.addAttribute("user", chum);
 		return "home";
 	}
 	

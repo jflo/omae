@@ -1,8 +1,10 @@
 package org.chummer.omae.users;
 
+import javax.ws.rs.FormParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +37,24 @@ public class ChummerController {
 	public @ResponseBody Chummer updateChummer(@RequestBody Chummer chum) {
 		chumms.updateChummer(chum);		
 		return chumms.getChummer(chum.getId());
+	}
+	
+	
+	@RequestMapping(value="/chummer/register", method = RequestMethod.POST)
+	public String newChummer(@FormParam(value = "username") String username, @FormParam(value = "email") String email, @FormParam(value = "password") String password, Model model) {
+		Chummer player = new Chummer();
+		player.setEmail(email);
+		player.setUserName(username);
+		player.setPassword(password);
+		chumms.newChummer(player);
+		groups.addMemberToGroup("Players", player);
+		player = chumms.getChummer("cn="+player.getUserName()+",ou=Users" );
+		return "redirect:/home?welcome=yes";
+	}
+	
+	@RequestMapping(value="/reg", method=RequestMethod.GET)
+	public String registrationView() {
+		return "reg";	
 	}
 	
 }

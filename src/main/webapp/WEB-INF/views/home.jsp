@@ -6,6 +6,7 @@
 </head>
 <body>
 
+<p>${user.userName}</p>
 
 
 </body>

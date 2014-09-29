@@ -34,6 +34,15 @@ public class ChummerRepoLDAPImpl implements ChummerRepo {
 		return LdapNameBuilder.newInstance("ou=Users")			
 				.add("cn", c.getUserName()).build();
 	}
+	
+	/**
+	 * Because sometimes the security sys only give you the username, not a full DN.
+	 */
+	@Override
+	public LdapName buildDn(String name) {
+		return LdapNameBuilder.newInstance("ou=Users")			
+				.add("cn", name).build();
+	}
 
 	@Override
 	public void newChummer(Chummer chum) {
@@ -83,5 +92,7 @@ public class ChummerRepoLDAPImpl implements ChummerRepo {
 		}
 		return chumNames;
 	}
+
+	
 
 }
