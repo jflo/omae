@@ -2,7 +2,8 @@
 <!-- Character sheet based on the Shadowrun 5th Edition Character Sheet -->
 <!-- Created by Keith Rudolph, krudolph@gmail.com -->
 <!-- Version -496 -->
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:exslt="http://exslt.org/common">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	
 	<xsl:include href="ConditionMonitor.xslt"/>
 	<xsl:template match="/character">
 		<xsl:text disable-output-escaping="yes"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">]]></xsl:text>
@@ -2960,7 +2961,7 @@
 				<xsl:copy-of select="current()"/>
 			</xsl:for-each>
 		</xsl:variable>
-		<xsl:for-each select="exslt:node-set($sortedlist)/spell">
+		<xsl:for-each select="$sortedlist/spell">
 			<xsl:choose>
 				<xsl:when test="position() = 1">
 					<tr>
@@ -3516,7 +3517,7 @@
 				</xsl:if>
 			</xsl:for-each>
 		</xsl:variable>
-		<xsl:for-each select="exslt:node-set($sortedcopy)/gear">
+		<xsl:for-each select="$sortedcopy/gear">
 			<xsl:choose>
 				<xsl:when test="position() = 1">
 					<tr>
@@ -3604,7 +3605,7 @@
 				</xsl:if>
 			</xsl:for-each>
 		</xsl:variable>
-		<xsl:for-each select="exslt:node-set($sortedcopy)/gear">
+		<xsl:for-each select="$sortedcopy/gear">
 			<xsl:choose>
 				<xsl:when test="position() = 1">
 					<tr>
@@ -3693,7 +3694,7 @@
 				</xsl:if>
 			</xsl:for-each>
 		</xsl:variable>
-		<xsl:for-each select="exslt:node-set($sortedcopy)/gear">
+		<xsl:for-each select="$sortedcopy/gear">
 			<xsl:choose>
 				<xsl:when test="position() = 1">
 					<tr>

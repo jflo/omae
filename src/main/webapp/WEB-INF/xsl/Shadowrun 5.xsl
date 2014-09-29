@@ -2,7 +2,7 @@
 <!-- Character sheet based on the Shadowrun 5th Edition Character Sheet -->
 <!-- Created by Keith Rudolph, krudolph@gmail.com -->
 <!-- Version -500 -->
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:include href="Shadowrun 5 Base.xslt"/>
 	<xsl:template name="skills1">
 		<xsl:variable name="items" select="skills/skill[knowledge = 'False' and (rating &gt; 0 or total &gt; 0)]"/>
