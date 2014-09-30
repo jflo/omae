@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<title>Frank Castle</title>
+<style type="text/css">
+					*
+					{
+						font-family: segoe condensed, tahoma, trebuchet ms, arial;
+						font-size: 8pt;
+						text-align: left;
+					}
+					.tableborder
+					{
+						border: solid 2px #1c4a2d;
+					}
+					.conditionmonitorbox
+					{
+						border: solid 2px #1c4a2d;
+						width: 24px;
+						height: 24px;
+						text-align: right;
+						vertical-align: text-bottom;
+						font-weight: bold;
+					}
+					.conditionmonitorboxfilled
+					{
+						border: solid 2px #1c4a2d;
+						width: 24px;
+						height: 24px;
+						text-align: right;
+						vertical-align: text-bottom;
+						font-weight: bold;
+						background-color: #bbbbbb;
+					}
+					.conditionmonitorboxnotused
+					{
+						border: solid 0px #1c4a2d;
+						width: 24px;
+						height: 24px;
+						text-align: right;
+						vertical-align: text-bottom;
+						font-weight: bold;
+						background-color: #FFFFFF;
+					}
+					.rowsummary
+					{
+						filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3a6349', endColorstr='#769582'); /* for IE */
+						background: -webkit-gradient(linear, left top, left bottom, from(#3a6349), to(#769582)); /* for webkit browsers */
+						background: -moz-linear-gradient(top,  #3a6349,  #769582); /* for firefox 3.6+ */ 
+						background-color: #3a6349;
+						color: #ffffff;
+						font-weight: bold;
+						font-style: italic;
+					}
+					.rowsummarybutton
+					{
+						color: #ffffff;
+						font-weight: bold;
+						margin-left: 20px;
+					}
+					.attributecell
+					{
+					}
+					.attributecell p
+					{
+						padding: 2px;
+						margin: 4px;
+						border: solid 1px #1c4a2d;
+					}
+					.indent
+					{
+						padding-left: 20px;
+					}
+					.hseparator
+					{
+						height: 5px;
+					}
+					.vseparator
+					{
+						width: 5px;
+					}
+					.block
+					{
+						page-break-inside: avoid;
+					}
+					.zalomit
+					{
+						page-break-after: always;
+					}
+					.notesrow
+					{
+						padding-left: 10px;
+					}
+					
+					@media print
+					{
+						.zalomit
+						{
+							page-break-after: always;
+						}
+						.sectionhide
+						{
+							visibility: hidden;
+							display:none;
+						}
+						.rowsummarybutton
+						{
+							visibility: hidden;
+							display: none;
+						}
+						.table
+						{
+							width: 100%;
+						}
+					}
+					
+					@media screen {
+						.sectionhide
+						{
+							visibility: visible;
+						}
+						.rowsummarybutton
+						{
+							visibility: visible;
+						}
+					}
+				</style>
+<script type="text/javascript">
+						function zalomit(what,idx)
+						{
+							var elem = document.getElementById(idx); 
+							if (elem.style.pageBreakAfter == 'always') {
+								txt = "NO";
+								elem.style.pageBreakAfter = 'auto';
+							}
+							else {
+								txt = "YES";
+								elem.style.pageBreakAfter = 'always';
+							}
+							what.innerHTML = "Page Break: " + txt;
+						}
+						function showhide(what,idx)
+						{
+							var elem = document.getElementById(idx); 
+							if (elem.className != 'sectionhide') {
+								txt = "NO";
+								elem.className = 'sectionhide';
+							}
+							else {
+								txt = "YES";
+								elem.className = 'block';
+							}
+							what.innerHTML = "Show: " + txt;
+						}
+					</script>
+</head>
+<body>
+<div id="PersonalDataBlock" class="block">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td class="tableborder" width="100%">
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tr>
+<td colspan="4"><strong>NAME/ALIAS:</strong> Frank Castle (Castle)</td><td colspan="4"><strong>PLAYER:</strong> Justin</td><td colspan="2"> MOVEMENT: 12/24</td>
+</tr>
+<tr>
+<td colspan="4"> METATYPE: Human</td><td width="10%">AGE:</td><td width="10%">48</td><td width="10%">SEX:</td><td width="10%">Male</td><td width="10%">NUYEN:</td><td width="10%">17293</td>
+</tr>
+<tr>
+<td width="10%">HEIGHT:</td><td width="10%">6'2</td><td width="10%">WEIGHT:</td><td width="10%">240</td><td width="10%">HAIR:</td><td width="10%">Brown</td><td width="10%">EYES:</td><td width="10%">Cyber</td><td width="10%">SKIN:</td><td width="10%">White</td>
+</tr>
+<tr>
+<td width="10%">KARMA:</td><td width="10%">7</td><td width="10%">TOTAL KARMA:</td><td width="10%">13</td><td width="10%">STREET CRED:</td><td width="10%">1</td><td width="10%">NOTORIETY:</td><td width="10%">0</td><td width="10%">PUBLIC AWARE:</td><td width="10%">0</td>
+</tr>
+<tr>
+<td width="10%">COMPOSURE:</td><td width="10%">7</td><td width="10%">JUDGE INTENTIONS:</td><td width="10%">7</td><td width="10%">LIFT/CARRY:</td><td width="10%">7</td><td width="10%">LIFT/CARRY WEIGHT:</td><td width="10%">45 kg/30 kg </td><td width="10%">MEMORY:</td><td width="10%">7</td>
+</tr>
+<tr>
+<td colspan="10" class="rowsummary"> PERSONAL DATA <span colspan="2" onClick="showhide(this,'PersonalDataBlock');" class="rowsummarybutton">Show: YES</span><span colspan="2" onClick="zalomit(this,'PersonalDataBlock');" class="rowsummarybutton">Page Break: NO</span></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="hseparator"></td>
+</tr>
+</table>
+</div>
+<div id="AttributesBlock" class="block">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td class="tableborder" width="100%">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td class="attributecell" style="text-align:center;" width="25%"><strong>PHYSICAL ATTRIBUTES</strong></td><td class="attributecell" style="text-align:center;" width="25%"><strong>MENTAL ATTRIBUTES</strong></td><td class="attributecell" style="text-align:center;" width="25%"><strong>SPECIAL ATTRIBUTES</strong></td><td class="attributecell" style="text-align:center;" width="25%"><strong>INITIATIVE</strong></td>
+</tr>
+<tr>
+<td class="attributecell" width="25%">
+<p> BODY: 4</p>
+</td><td class="attributecell" width="25%">
+<p> CHARISMA: 3</p>
+</td><td class="attributecell" width="25%">
+<p> EDGE: 5</p>
+</td><td class="attributecell" width="25%">
+<p> INITIATIVE: 9 + 1d6</p>
+</td>
+</tr>
+<tr>
+<td class="attributecell" width="25%">
+<p> AGILITY: 6</p>
+</td><td class="attributecell" width="25%">
+<p> INTUITION: 4</p>
+</td><td class="attributecell" width="25%">
+<p>CURRENT EDGE POINTS:</p>
+</td><td class="attributecell" width="25%">
+<p> &nbsp; </p>
+</td>
+</tr>
+<tr>
+<td class="attributecell" width="25%">
+<p> REACTION: 5</p>
+</td><td class="attributecell" width="25%">
+<p> LOGIC: 3</p>
+</td><td class="attributecell" width="25%">
+<p> ESSENCE: 2.49</p>
+</td><td class="attributecell" width="25%">
+<p> RIGGER INIT: 9 + 1d6</p>
+</td>
+</tr>
+<tr>
+<td valign="top" class="attributecell" width="25%">
+<p> STRENGTH: 3</p>
+</td><td valign="top" class="attributecell" width="25%">
+<p> WILLPOWER: 4</p>
+</td><td valign="top" class="attributecell" width="25%">
+<p> &nbsp; </p>
+</td><td class="attributecell" width="25%">
+<p> MATRIX AR: 9 + 1d6<br>
+												MATRIX COLD: 4 + DP + 3d6<br>
+												MATRIX HOT: 4 + DP + 4d6</p>
+</td>
+</tr>
+<tr>
+<td colspan="4" class="rowsummary"> ATTRIBUTES <span colspan="1" onClick="showhide(this,'AttributesBlock');" class="rowsummarybutton">Show: YES</span><span colspan="1" onClick="zalomit(this,'AttributesBlock');" class="rowsummarybutton">Page Break: NO</span></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="hseparator"></td>
+</tr>
+</table>
+</div>
+<div id="SkillsBlock" class="block">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td class="tableborder" width="100%">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td valign="top" style="text-align:center;" width="33%"><strong>ACTIVE SKILLS</strong>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td width="45%"><strong>SKILL NAME</strong></td><td style="text-align:center;" width="15%"><strong>POOL</strong></td><td style="text-align:center;" width="10%"><strong>RTG</strong></td><td style="text-align:center;" width="20%"><strong>ATT</strong></td><td style="text-align:center;" width="10%"><strong>MOD</strong></td>
+</tr>
+<tr>
+<td valign="top" width="45%">Animal Handling</td><td valign="top" style="text-align:center;" width="15%">2</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">3 (CHA)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Archery</td><td valign="top" style="text-align:center;" width="15%">5</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">6 (AGI)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Armorer</td><td valign="top" style="text-align:center;" width="15%">5</td><td valign="top" style="text-align:center;" width="10%">2</td><td valign="top" style="text-align:center;" width="20%">3 (LOG)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Automatics</td><td valign="top" style="text-align:center;" width="15%">11</td><td valign="top" style="text-align:center;" width="10%">5</td><td valign="top" style="text-align:center;" width="20%">6 (AGI)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Blades</td><td valign="top" style="text-align:center;" width="15%">10</td><td valign="top" style="text-align:center;" width="10%">4</td><td valign="top" style="text-align:center;" width="20%">6 (AGI)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Clubs</td><td valign="top" style="text-align:center;" width="15%">5</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">6 (AGI)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Computer</td><td valign="top" style="text-align:center;" width="15%">2</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">3 (LOG)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Con</td><td valign="top" style="text-align:center;" width="15%">2</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">3 (CHA)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Cybercombat</td><td valign="top" style="text-align:center;" width="15%">2</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">3 (LOG)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Demolitions (Improvised Explosives)</td><td valign="top" style="text-align:center;" width="15%">5 (7)</td><td valign="top" style="text-align:center;" width="10%">2</td><td valign="top" style="text-align:center;" width="20%">3 (LOG)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Disguise</td><td valign="top" style="text-align:center;" width="15%">3</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">4 (INT)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Diving</td><td valign="top" style="text-align:center;" width="15%">3</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">4 (BOD)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Escape Artist</td><td valign="top" style="text-align:center;" width="15%">5</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">6 (AGI)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Etiquette</td><td valign="top" style="text-align:center;" width="15%">2</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">3 (CHA)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">First Aid</td><td valign="top" style="text-align:center;" width="15%">5</td><td valign="top" style="text-align:center;" width="10%">2</td><td valign="top" style="text-align:center;" width="20%">3 (LOG)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Forgery</td><td valign="top" style="text-align:center;" width="15%">2</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">3 (LOG)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Free-Fall</td><td valign="top" style="text-align:center;" width="15%">3</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">4 (BOD)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Gunnery</td><td valign="top" style="text-align:center;" width="15%">5</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">6 (AGI)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Gymnastics (Parkour)</td><td valign="top" style="text-align:center;" width="15%">9 (11)</td><td valign="top" style="text-align:center;" width="10%">3</td><td valign="top" style="text-align:center;" width="20%">6 (AGI)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Hacking</td><td valign="top" style="text-align:center;" width="15%">2</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">3 (LOG)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+</table>
+</td><td valign="top" style="border-left: solid 1px #1c4a2d; border-right: solid 1px #1c4a2d; text-align:center;" width="33%"><strong>ACTIVE SKILLS</strong>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td width="45%"><strong>SKILL NAME</strong></td><td style="text-align:center;" width="15%"><strong>POOL</strong></td><td style="text-align:center;" width="10%"><strong>RTG</strong></td><td style="text-align:center;" width="20%"><strong>ATT</strong></td><td style="text-align:center;" width="10%"><strong>MOD</strong></td>
+</tr>
+<tr>
+<td valign="top" width="45%">Heavy Weapons</td><td valign="top" style="text-align:center;" width="15%">8</td><td valign="top" style="text-align:center;" width="10%">2</td><td valign="top" style="text-align:center;" width="20%">6 (AGI)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Impersonation</td><td valign="top" style="text-align:center;" width="15%">2</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">3 (CHA)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Instruction</td><td valign="top" style="text-align:center;" width="15%">5</td><td valign="top" style="text-align:center;" width="10%">2</td><td valign="top" style="text-align:center;" width="20%">3 (CHA)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Intimidation</td><td valign="top" style="text-align:center;" width="15%">6</td><td valign="top" style="text-align:center;" width="10%">3</td><td valign="top" style="text-align:center;" width="20%">3 (CHA)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Leadership</td><td valign="top" style="text-align:center;" width="15%">8</td><td valign="top" style="text-align:center;" width="10%">5</td><td valign="top" style="text-align:center;" width="20%">3 (CHA)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Longarms</td><td valign="top" style="text-align:center;" width="15%">11</td><td valign="top" style="text-align:center;" width="10%">5</td><td valign="top" style="text-align:center;" width="20%">6 (AGI)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Navigation</td><td valign="top" style="text-align:center;" width="15%">3</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">4 (INT)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Negotiation</td><td valign="top" style="text-align:center;" width="15%">6</td><td valign="top" style="text-align:center;" width="10%">3</td><td valign="top" style="text-align:center;" width="20%">3 (CHA)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Perception</td><td valign="top" style="text-align:center;" width="15%">3</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">4 (INT)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Performance</td><td valign="top" style="text-align:center;" width="15%">2</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">3 (CHA)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Pilot Ground Craft</td><td valign="top" style="text-align:center;" width="15%">6</td><td valign="top" style="text-align:center;" width="10%">1</td><td valign="top" style="text-align:center;" width="20%">5 (REA)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Pilot Watercraft</td><td valign="top" style="text-align:center;" width="15%">4</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">5 (REA)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Pistols</td><td valign="top" style="text-align:center;" width="15%">11</td><td valign="top" style="text-align:center;" width="10%">5</td><td valign="top" style="text-align:center;" width="20%">6 (AGI)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Running</td><td valign="top" style="text-align:center;" width="15%">6</td><td valign="top" style="text-align:center;" width="10%">3</td><td valign="top" style="text-align:center;" width="20%">3 (STR)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Sneaking</td><td valign="top" style="text-align:center;" width="15%">5</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">6 (AGI)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Survival</td><td valign="top" style="text-align:center;" width="15%">3</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">4 (WIL)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Swimming</td><td valign="top" style="text-align:center;" width="15%">2</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">3 (STR)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Throwing Weapons</td><td valign="top" style="text-align:center;" width="15%">8</td><td valign="top" style="text-align:center;" width="10%">2</td><td valign="top" style="text-align:center;" width="20%">6 (AGI)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr>
+<td valign="top" width="45%">Tracking</td><td valign="top" style="text-align:center;" width="15%">3</td><td valign="top" style="text-align:center;" width="10%">0</td><td valign="top" style="text-align:center;" width="20%">4 (INT)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Unarmed Combat</td><td valign="top" style="text-align:center;" width="15%">10</td><td valign="top" style="text-align:center;" width="10%">4</td><td valign="top" style="text-align:center;" width="20%">6 (AGI)
+												</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+</table>
+</td><td valign="top" style="text-align:center;" width="33%"><strong>KNOWLEDGE SKILLS</strong>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td width="45%"><strong>SKILL NAME</strong></td><td style="text-align:center;" width="15%"><strong>POOL</strong></td><td style="text-align:center;" width="10%"><strong>RTG</strong></td><td style="text-align:center;" width="20%"><strong>ATT</strong></td><td style="text-align:center;" width="10%"><strong>MOD</strong></td>
+</tr>
+<tr>
+<td valign="top" width="45%">Area Knowledge: Seattle</td><td valign="top" style="text-align:center;" width="15%">6</td><td valign="top" style="text-align:center;" width="10%">2</td><td valign="top" style="text-align:center;" width="20%">4 (INT)
+														</td><td valign="top" style="text-align:center;" width="10%">0</td>
+</tr>
+<tr bgcolor="#e4e4e4">
+<td valign="top" width="45%">Combat Tactics</td><td

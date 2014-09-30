@@ -2,7 +2,7 @@
 <!-- Condition Monitor Box Template -->
 <!-- Created by KeyMasterOfGozer -->
 <!-- Version -500 -->
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <!--
   **** ConditionMonitor(PenaltyBox,CMWidth,TotalBoxes,OverFlow,DamageTaken)
     Params:

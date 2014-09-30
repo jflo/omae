@@ -3,7 +3,7 @@
 <!-- Created by Keith Rudolph, krudolph@gmail.com -->
 <!-- Version -500 -->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	<xsl:include href="Shadowrun 5 Base.xslt"/>
+	<xsl:include href="Shadowrun5Base.xslt"/>
 	<xsl:template name="skills1">
 		<xsl:variable name="items" select="skills/skill[knowledge = 'False' and (rating &gt; 0 or total &gt; 0)]"/>
 		<xsl:variable name="halfcut" select="round(count($items) div 2)"/>
@@ -173,11 +173,11 @@
 												</td>
 											</tr>
 		</xsl:for-each>
-		<xsl:if test="mugshot != ''">
+		<xsl:if test="mugshotbase64 != ''">
 											<tr>
 												<td colspan="5" style="text-align:center;">
 													<br />
-													<img src="{mugshot}" />
+													<img  src="data:image/jpeg;base64,{mugshotbase64}" />
 												</td>
 											</tr>
 		</xsl:if>

@@ -90,7 +90,7 @@ public class RunnerController {
 		//Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
 				
 		TransformerFactory factory = TransformerFactory.newInstance();
-		File xsl = new File(servletContext.getRealPath("/WEB-INF/xsl/Shadowrun 5.xsl"));
+		File xsl = new File(servletContext.getRealPath("/WEB-INF/xsl/Shadowrun5.xsl"));
 		log.debug("found xsl transform at "+xsl.getAbsolutePath());
 		Source xslt = new StreamSource(xsl);
         Transformer transformer = factory.newTransformer(xslt);
