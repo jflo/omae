@@ -2,6 +2,10 @@ package org.chummer.omae.users;
 
 import static org.springframework.ldap.query.LdapQueryBuilder.query;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +49,7 @@ public class ChummerRepoLDAPImpl implements ChummerRepo {
 	}
 
 	@Override
-	public void newChummer(Chummer chum) {
+	public void newChummer(Chummer chum) throws IOException {
 		LdapName newChumDn = buildDn(chum);
 		BasicAttribute objClassAttribs = new BasicAttribute("objectclass");
 		objClassAttribs.add("inetOrgPerson");
@@ -58,6 +62,11 @@ public class ChummerRepoLDAPImpl implements ChummerRepo {
 		ctx.setAttributeValue("mail", chum.getEmail());
 		
 		ldapTemplate.bind(ctx);		
+				
+		Path userHomeDir = Paths.get("/home/omaes/" + chum.getUserName());
+		if(!Files.exists(userHomeDir)) {
+		    Files.createDirectory(userHomeDir);
+		}
 	}
 	
 	@Override

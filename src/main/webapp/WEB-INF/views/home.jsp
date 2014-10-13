@@ -33,7 +33,8 @@
 						<tr>
 							<td>${runner.name}</td>
 							<td><a href="<c:url value="/runner/download/${runner.name}.chum5"/>"> download .chum5</a> </td>
-							<td><a href="<c:url value="/runner/play/${runner.name}"/>">play</a> </td>
+							<td><a href="<c:url value="/runner/play/${runner.name}"/>" alt="load character sheet">play</a> </td>
+							<td><a href="<c:url value="/runner/kill/${runner.name}"/>" alt="remove runner files">kill</a> </td>
 						</tr>
 					</c:forEach>
 				</table>

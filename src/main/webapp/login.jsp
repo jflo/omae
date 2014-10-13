@@ -25,21 +25,17 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-					<strong>
-						<%
-							if (request.getParameter("login_error") != null) {
-								out.println("Overwatch Initiated, retry?");
-							}
-							
-							if (request.getParameter("welcome") !=null ) {
-								out.println("new chummer registered, login omae");	
-							}
-						%>						
-						</strong>
+					<c:if test="${not empty param.login_error}">
+    					<div class="alert alert-danger" role="alert">Overwatch Initiated, retry?</div>
+					</c:if>
+					<c:if test="${not empty param.welcome}">
+    					<div class="alert alert-success" role="alert">Welcome aboard. Now login.</div>
+					</c:if>			
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form role="form" action="/omae/j_spring_security_check"
+					<c:url var="post_url"  value="/j_spring_security_check" />
+					<form role="form" action="<c:url value="${post_url}"/>"
 						method="post">
 						<div class="form-group">
 							<input type="username" name="j_username" class="form-control"

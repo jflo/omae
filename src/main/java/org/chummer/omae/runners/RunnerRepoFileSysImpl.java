@@ -24,7 +24,7 @@ public class RunnerRepoFileSysImpl implements RunnerRepo {
 
 	@Override
 	public void addRunner(String userName, String runnerName,
-			MultipartFile chumFile) throws IOException {
+			MultipartFile chumFile, MultipartFile renderFile) throws IOException {
 		Path userHomeDir = Paths.get("/home/omaes/" + userName);
 		if (Files.exists(userHomeDir)
 				&& Files.isDirectory(userHomeDir, LinkOption.NOFOLLOW_LINKS)) {
@@ -34,17 +34,25 @@ public class RunnerRepoFileSysImpl implements RunnerRepo {
 			Files.createDirectory(userHomeDir);
 
 		}
-		if (!chumFile.isEmpty()) {
-			Path runnerFile = Paths.get(userHomeDir.toString(), runnerName
+		if (!chumFile.isEmpty() && !renderFile.isEmpty()) {
+			Path toChumFile = Paths.get(userHomeDir.toString(), runnerName
 					+ ".chum5");
-			byte[] bytes = chumFile.getBytes();
+			
 			BufferedOutputStream stream = new BufferedOutputStream(
-					Files.newOutputStream(runnerFile, StandardOpenOption.CREATE_NEW));
-			stream.write(bytes);
+					Files.newOutputStream(toChumFile, StandardOpenOption.CREATE_NEW));
+			stream.write(chumFile.getBytes());
+			stream.close();
+			
+			Path toRenderFile = Paths.get(userHomeDir.toString(), runnerName
+					+ ".render.xml");
+			
+			stream = new BufferedOutputStream(
+					Files.newOutputStream(toRenderFile, StandardOpenOption.CREATE_NEW));
+			stream.write(renderFile.getBytes());
 			stream.close();
 
 		} else {
-			IOException ioe = new IOException("File received is empty");
+			IOException ioe = new IOException("one of the files received is empty");
 			ioe.fillInStackTrace();
 			throw ioe;
 		}
@@ -104,6 +112,28 @@ public class RunnerRepoFileSysImpl implements RunnerRepo {
 		Path runnerFile = Paths.get(userHomeDir.toString(), runnerName
 				+ ".chum5");
 		return new BufferedInputStream(Files.newInputStream(runnerFile, StandardOpenOption.READ));
+	}
+	
+	@Override
+	public InputStream downloadRenderFile(String userName, String runnerName)
+			throws IOException {
+		Path userHomeDir = Paths.get("/home/omaes/" + userName);
+		Path runnerFile = Paths.get(userHomeDir.toString(), runnerName
+				+ ".render.xml");
+		return new BufferedInputStream(Files.newInputStream(runnerFile, StandardOpenOption.READ));
+	}
+
+	@Override
+	public void deleteFiles(String userName, String runnerName)
+			throws IOException {
+		Path userHomeDir = Paths.get("/home/omaes/" + userName);
+		Path renderFile = Paths.get(userHomeDir.toString(), runnerName
+				+ ".render.xml");
+		Path chumFile = Paths.get(userHomeDir.toString(), runnerName
+				+ ".chum5");
+		Files.delete(renderFile);
+		Files.delete(chumFile);
+		
 	}
 
 }

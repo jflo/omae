@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,8 +26,8 @@
 					<strong>Papers, please</strong>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal" action='/omae/chummer/register'
-						method="POST">
+					<c:url var="post_url"  value="/chummer/register" />
+					<form class="form-horizontal" action="${post_url}" method="POST">
 						<fieldset>
 							<div id="legend">
 								<legend class="">Register</legend>

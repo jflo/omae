@@ -19,20 +19,33 @@
 </head>
 <body>
 <div class="container" style="margin-top: 30px">
-		<div class="col-md-4">
+		<div class="col-md-5">
       <div class="panel panel-default">
         <div class="panel-heading"><strong>Chumm5 Upload</strong> <small><i>...send in the runners</i></small></div>
         <div class="panel-body">
 			<c:if test="${not empty error}">
     			<div class="alert alert-danger" role="alert">${error}</div>
 			</c:if>
-         
-          <h4>Select a .chumm file (must be in campaign mode)</h4>
-          <form action="/omae/runner/upload" method="post" enctype="multipart/form-data" id="js-upload-form">
+                   <c:url value="/runner/upload" var="post_url"/>
+          <form action="${post_url}" method="post" enctype="multipart/form-data" id="js-upload-form">
             <div class="form-inline">
               <div class="form-group">
-                <input type="file" name="file" id="js-upload-files">
-                <input type="text" name="name" value="Runner Name">
+              <div class="input-group">
+  				    <span class="input-group-addon">Runner name</span>
+  					<input type="text" name="name">
+			  </div>
+              
+              <div class="input-group">
+                <span class="input-group-addon">.chum5 file</span>
+                <input type="file" name="chumfile" id="js-upload-files" alt=".chum5 file from Chummer5"><br>
+                </div>
+                
+                <div class="input-group">
+                <span class="input-group-addon">.xml export file</span>
+                
+                <input type="file" name="renderfile" id="js-upload-files" alt="the xml export from the print menu of Chummer5 for the above .chum5 file">
+                </div>
+                
               </div>
               <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Upload runner</button>
             </div>

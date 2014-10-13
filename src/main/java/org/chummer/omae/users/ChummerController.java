@@ -1,5 +1,7 @@
 package org.chummer.omae.users;
 
+import java.io.IOException;
+
 import javax.ws.rs.FormParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ public class ChummerController {
 	GroupRepo groups;
 	
 	@RequestMapping(value = "/chummer", method = RequestMethod.POST)
-	public @ResponseBody Chummer newChummer(@RequestBody Chummer chum) {
+	public @ResponseBody Chummer newChummer(@RequestBody Chummer chum) throws IOException {
 		chumms.newChummer(chum);
 		groups.addMemberToGroup("Players", chum);
 		Chummer retval = chumms.getChummer("cn="+chum.getUserName()+",ou=Users" );
@@ -41,7 +43,7 @@ public class ChummerController {
 	
 	
 	@RequestMapping(value="/chummer/register", method = RequestMethod.POST)
-	public String newChummer(@FormParam(value = "username") String username, @FormParam(value = "email") String email, @FormParam(value = "password") String password, Model model) {
+	public String newChummer(@FormParam(value = "username") String username, @FormParam(value = "email") String email, @FormParam(value = "password") String password, Model model) throws IOException {
 		Chummer player = new Chummer();
 		player.setEmail(email);
 		player.setUserName(username);

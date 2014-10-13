@@ -47,13 +47,13 @@ public class RunnerController {
 	@Secured("ROLE_PLAYERS")
     @RequestMapping(value="/runner/upload", method=RequestMethod.POST)
     public String handleFileUpload(@RequestParam("name") String runnerName,
-            @RequestParam("file") MultipartFile file, Model model){
+            @RequestParam MultipartFile chumfile, @RequestParam MultipartFile renderfile, Model model){
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String userName = auth.getName();
 	    
 	    try {
-	    	runners.addRunner(userName, runnerName, file);
+	    	runners.addRunner(userName, runnerName, chumfile, renderfile);
 	    } catch(IOException e) {
 	    	log.error("couldn't create new runner for user "+userName, e);
 			model.addAttribute("error", e.getMessage());
@@ -86,7 +86,7 @@ public class RunnerController {
 	public void characterSheet(@PathVariable String runnerName, HttpServletResponse response) throws IOException, ParserConfigurationException, SAXException, TransformerException{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String userName = auth.getName();
-		InputStream is = runners.downloadChumFile(userName, runnerName);
+		InputStream is = runners.downloadRenderFile(userName, runnerName);
 		//Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
 				
 		TransformerFactory factory = TransformerFactory.newInstance();
@@ -98,9 +98,15 @@ public class RunnerController {
         
         response.setContentType("text/html");
         transformer.transform(sheet, new StreamResult(response.getOutputStream()));
-		//IOUtils.copy(is, response.getOutputStream());
-	    response.flushBuffer();
-		
+	    response.flushBuffer();		
 	}
-
+	
+	@Secured("ROLE_PLAYERS")
+	@RequestMapping(value="/runner/kill/{runnerName}", method=RequestMethod.GET)
+	public String deleteRunner(@PathVariable String runnerName) throws IOException {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userName = auth.getName();
+		runners.deleteFiles(userName, runnerName);
+		return "redirect:/home";
+	}
 }
