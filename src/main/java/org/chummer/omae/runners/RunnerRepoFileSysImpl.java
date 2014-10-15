@@ -136,4 +136,20 @@ public class RunnerRepoFileSysImpl implements RunnerRepo {
 		
 	}
 
+	@Override
+	public void stun(String userName, String runnerName, int amount)
+			throws IOException {
+		//open renderfile
+		//increment <stuncmfilled>0</stuncmfilled>
+		//if overflowed, increment physical?
+		
+	}
+
+	@Override
+	public void physicalDamage(String userName, String runnerName, int amount)
+			throws IOException {
+		//increment <physicalcmfilled>0</physicalcmfilled>
+		
+	}
+
 }

@@ -19,4 +19,8 @@ public interface RunnerRepo {
 	public InputStream downloadRenderFile(String userName, String runnerName) throws IOException;
 
 	public void deleteFiles(String userName, String runnerName) throws IOException;
+	
+	public void stun(String userName, String runnerName, int amount) throws IOException;
+	
+	public void physicalDamage(String userName, String runnerName, int amount) throws IOException;
 }
