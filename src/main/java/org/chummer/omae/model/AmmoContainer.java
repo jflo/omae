@@ -1,6 +1,7 @@
 package org.chummer.omae.model;
 
-public enum AmmoContainer {
-
-	CLIP, BELT, CYLINDER
+public class AmmoContainer {
+	AmmoContainerType type;
+	int rounds;
+	AmmoType ammoType;
 }

@@ -7,6 +7,7 @@ public class Weapon {
 	String name;
 	String guid;
 	WeaponType type;
+	WeaponCategory category;
 	Damage damage;
 	int armorPen;
 	int concealability;
@@ -17,5 +18,12 @@ public class Weapon {
 	Set<FiringModes> modes;
 	int recoilComp;
 	AmmoCapacity maxAmmo;
-	
+	int rangeMultiplier;
+	int fullBurst;
+	int suppressive;
+	Source source;
+	String petName;
+	int accuracy;
+	Set<WeaponAccessory> accessories;
+	Weapon underBarrel;
 }

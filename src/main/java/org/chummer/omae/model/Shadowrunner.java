@@ -23,4 +23,8 @@ public class Shadowrunner {
 	Set<Contact> contacts;
 	Set<Armor> armor;
 	Set<Weapon> weapons;
+	Set<Cyberware> chrome;
+	Set<Quality> qualities;
+	Lifestyle lifestyle;
+	Set<Gear> inventory;
 }

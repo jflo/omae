@@ -1,0 +1,7 @@
+package org.chummer.omae.model;
+
+public enum CyberCategory {
+
+	HEADWARE, EYEWARE, EARWARE, BODYWARE, CYBERLIMB, CYBERLIMB_ENHANCEMENT,
+	CYBERLIMB_ACCESSORY, CYBER_IMPLANT_WEAPON
+}

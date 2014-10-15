@@ -2,6 +2,6 @@ package org.chummer.omae.model;
 
 public class AmmoCapacity {
 
-	AmmoContainer type;
+	AmmoContainerType type;
 	int ammount;
 }
