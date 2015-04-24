@@ -5,8 +5,8 @@ import java.util.Set;
 
 public class Shadowrunner {
 
-	Metatype type;
-	Movement move;
+	public Metatype type;
+	public Movement move;
 	String name;
 	Description description;
 	String playername;
