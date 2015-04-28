@@ -7,15 +7,15 @@ public class Shadowrunner {
 
 	public Metatype type;
 	public Movement move;
-	String name;
-	Description description;
-	String playername;
-	int karma;
-	SocialStanding rep;
-	int nuyen;
-	AwakenedType awakened;
+	public String name;
+	public Description description;
+	public String playername;
+	public int karma;
+	public SocialStanding rep;
+	public int nuyen;
+	public AwakenedType awakened;
 	Map<AttributeType, Attribute> attributes;
-	float totalEssence;
+	public float totalEssence;
 	int physicalDamage;
 	int stunDamage;
 	Map<SkillGroupType, SkillGroup> groupsTaken;

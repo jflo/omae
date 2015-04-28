@@ -2,5 +2,5 @@ package org.chummer.omae.model;
 
 public enum AwakenedType {
 
-	MAGICIAN, ADEPT, TECHNOMANCER;
+	MAGICIAN, ADEPT, TECHNOMANCER, MUNDANE;
 }
