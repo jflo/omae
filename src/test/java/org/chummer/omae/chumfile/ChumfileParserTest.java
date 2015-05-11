@@ -4,9 +4,12 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import org.chummer.omae.model.Armor;
 import org.chummer.omae.model.AttributeType;
 import org.chummer.omae.model.AwakenedType;
 import org.chummer.omae.model.Description;
+import org.chummer.omae.model.Gear;
+import org.chummer.omae.model.GearCategory;
 import org.chummer.omae.model.Metatype;
 import org.chummer.omae.model.Movement;
 import org.chummer.omae.model.Shadowrunner;
@@ -50,6 +53,16 @@ public class ChumfileParserTest {
 		assertNotNull(sr.contacts);
 		assertTrue(sr.contacts.size() == 2);
 		assertTrue(sr.contacts.get("Frank Sobotka").loyalty == 2);
+		
+		assertNotNull(sr.armor);
+		assertTrue(sr.armor.size() == 1);
+		for(Armor a : sr.armor) {
+			assertTrue(a.armorValue == 9);
+			for(Gear g : a.addonGear) {
+				assertTrue("Biomonitor".equals(g.name));
+				assertTrue(GearCategory.BIOTECH.equals(g.category));
+			}
+		}
 		
 	}
 

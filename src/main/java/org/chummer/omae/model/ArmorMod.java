@@ -1,17 +1,15 @@
 package org.chummer.omae.model;
 
-public class Gear {
-
+public class ArmorMod {
 	public String guid;
 	public String name;
-	public GearCategory category;
-	public int armorCapacity;
+	public String category;
+	public String armor;
+	public String capacity;
 	public int maxRating;
 	public int rating;
-	public int quantity;
 	public Availability availability;
 	public int cost;
-	public String extra;
-	public boolean bonded;
+	public Source source;
 	public boolean equipped;
 }
