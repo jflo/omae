@@ -2,5 +2,5 @@ package org.chummer.omae.model;
 
 public enum AttributeType {
 
-	BODY, REACTION, INTUITION, AGILITY, MAGIC, RESONANCE, STRENGTH, CHARISMA, EDGE, LOGIC, WILLPOWER, ESSENCE;
+	BOD, REA, INT, AGI, MAG, RES, STR, CHA, EDG, LOG, WIL, ESS, INI;
 }

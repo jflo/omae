@@ -5,6 +5,7 @@ import java.util.Set;
 
 public class Shadowrunner {
 
+	//these are all public because i totes don't care
 	public Metatype type;
 	public Movement move;
 	public String name;
@@ -14,17 +15,17 @@ public class Shadowrunner {
 	public SocialStanding rep;
 	public int nuyen;
 	public AwakenedType awakened;
-	Map<AttributeType, Attribute> attributes;
+	public Map<AttributeType, Attribute> attributes;
 	public float totalEssence;
-	int physicalDamage;
-	int stunDamage;
-	Map<SkillGroupType, SkillGroup> groupsTaken;
-	Set<Skill> skills;
-	Set<Contact> contacts;
-	Set<Armor> armor;
-	Set<Weapon> weapons;
-	Set<Cyberware> chrome;
-	Set<Quality> qualities;
-	Lifestyle lifestyle;
-	Set<Gear> inventory;
+	public int physicalDamage;
+	public int stunDamage;
+	public Map<SkillGroupType, SkillGroup> groupsTaken;
+	public Set<Skill> skills;
+	public Set<Contact> contacts;
+	public Set<Armor> armor;
+	public Set<Weapon> weapons;
+	public Set<Cyberware> chrome;
+	public Set<Quality> qualities;
+	public Lifestyle lifestyle;
+	public Set<Gear> inventory;
 }
