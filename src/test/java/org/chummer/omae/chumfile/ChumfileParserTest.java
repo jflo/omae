@@ -47,6 +47,10 @@ public class ChumfileParserTest {
 		assertTrue(sr.skills.size() > 0);
 		assertTrue(sr.skills.get("Aeronautics Mechanic").pool() == 6);
 		
+		assertNotNull(sr.contacts);
+		assertTrue(sr.contacts.size() == 2);
+		assertTrue(sr.contacts.get("Frank Sobotka").loyalty == 2);
+		
 	}
 
 }

@@ -23,6 +23,7 @@ import org.chummer.omae.model.Attribute;
 import org.chummer.omae.model.AttributeType;
 import org.chummer.omae.model.AwakenedType;
 import org.chummer.omae.model.Book;
+import org.chummer.omae.model.Contact;
 import org.chummer.omae.model.Description;
 import org.chummer.omae.model.Metatype;
 import org.chummer.omae.model.Movement;
@@ -81,9 +82,36 @@ public class ChumfileParser {
 		retval.totalEssence = Float.parseFloat(xPath.compile("/character/totaless").evaluate(doc));
 		retval.attributes = this.parseAttributes(doc);
 		retval.skills = this.parseSkills(doc, retval);
+		retval.contacts = this.parseContacts(doc);
 		return retval;
 	}
 	
+	private Map<String, Contact> parseContacts(Document doc) throws XPathExpressionException {
+		Map<String, Contact> contacts = new HashMap<String, Contact>();
+		NodeList contactsNL = (NodeList) xPath.compile("/character/contacts/contact").evaluate(doc, XPathConstants.NODESET);
+		for(int i = 0; i< contactsNL.getLength(); i++) {
+			Node node = contactsNL.item(i);
+			Contact c = new Contact();
+			NodeList attribDetails = node.getChildNodes();
+			for(int j=0; j<attribDetails.getLength(); j++) {
+				Node deet = attribDetails.item(j);
+				if("name".equals(deet.getNodeName())) {
+					c.name = deet.getTextContent();
+				} else if ("role".equals(deet.getNodeName())) {
+					c.role = deet.getTextContent();
+				} else if ("location".equals(deet.getNodeName())) {
+					c.location = deet.getTextContent();
+				} else if ("connection".equals(deet.getNodeName())) {
+					c.connection = Integer.parseInt(deet.getTextContent());
+				} else if ("loyalty".equals(deet.getNodeName())) {
+					c.loyalty = Integer.parseInt(deet.getTextContent());
+				} 
+			}
+			contacts.put(c.name, c);
+		}
+		return contacts;
+	}
+
 	private Map<String, Skill> parseSkills(Document doc, Shadowrunner sr) throws XPathExpressionException {
 		Map<String, Skill> skills = new HashMap<String, Skill>();
 		NodeList skillsNL = (NodeList) xPath.compile("/character/skills/skill").evaluate(doc, XPathConstants.NODESET);

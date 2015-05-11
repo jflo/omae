@@ -21,7 +21,7 @@ public class Shadowrunner {
 	public int stunDamage;
 	public Map<SkillGroupType, SkillGroup> groupsTaken;
 	public Map<String, Skill> skills;
-	public Set<Contact> contacts;
+	public Map<String, Contact> contacts;
 	public Set<Armor> armor;
 	public Set<Weapon> weapons;
 	public Set<Cyberware> chrome;
