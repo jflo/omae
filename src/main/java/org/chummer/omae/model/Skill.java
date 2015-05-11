@@ -1,22 +1,23 @@
 package org.chummer.omae.model;
 
 public class Skill {
-	String name;
-	SkillGroupType group;
-	boolean grouped;
-	boolean defaulted;
-	int rating;
-	int base;
-	int karma;
-	int freeLevels;
-	int ratingMax;
-	boolean exotic;
-	String specialization;
-	boolean isKnowledge;
-	Attribute uses;
-	Source src;
+	public String name;
+	public SkillGroupType group;
+	public boolean grouped;
+	public boolean defaulted;
+	public int rating;
+	public int base;
+	public int karma;
+	public int freeLevels;
+	public int ratingMax;
+	public boolean exotic;
+	public String specialization;
+	public boolean isKnowledge;
+	public Attribute uses;
+	public Source src;
+	public String category;
 	
-	public int total() {
+	public int pool() {
 		return rating + uses.total();
 	}
 }

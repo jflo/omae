@@ -43,6 +43,10 @@ public class ChumfileParserTest {
 		assertTrue(sr.attributes.size() > 0);
 		assertTrue(sr.attributes.get(AttributeType.BOD).base == 3);
 		
+		assertNotNull(sr.skills);
+		assertTrue(sr.skills.size() > 0);
+		assertTrue(sr.skills.get("Aeronautics Mechanic").pool() == 6);
+		
 	}
 
 }

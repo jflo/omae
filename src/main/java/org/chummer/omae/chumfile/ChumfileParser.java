@@ -7,7 +7,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,13 +22,18 @@ import javax.xml.xpath.XPathFactory;
 import org.chummer.omae.model.Attribute;
 import org.chummer.omae.model.AttributeType;
 import org.chummer.omae.model.AwakenedType;
+import org.chummer.omae.model.Book;
 import org.chummer.omae.model.Description;
 import org.chummer.omae.model.Metatype;
 import org.chummer.omae.model.Movement;
 import org.chummer.omae.model.Shadowrunner;
+import org.chummer.omae.model.Skill;
+import org.chummer.omae.model.SkillGroupType;
 import org.chummer.omae.model.SocialStanding;
+import org.chummer.omae.model.Source;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -73,9 +80,65 @@ public class ChumfileParser {
 		retval.awakened = this.parseAwake(doc);
 		retval.totalEssence = Float.parseFloat(xPath.compile("/character/totaless").evaluate(doc));
 		retval.attributes = this.parseAttributes(doc);
+		retval.skills = this.parseSkills(doc, retval);
 		return retval;
 	}
 	
+	private Map<String, Skill> parseSkills(Document doc, Shadowrunner sr) throws XPathExpressionException {
+		Map<String, Skill> skills = new HashMap<String, Skill>();
+		NodeList skillsNL = (NodeList) xPath.compile("/character/skills/skill").evaluate(doc, XPathConstants.NODESET);
+		for(int i = 0; i< skillsNL.getLength(); i++) {
+			Node node = skillsNL.item(i);
+			Skill s = new Skill();
+			Source src = new Source();
+			NodeList skillDetails = node.getChildNodes();
+			for(int j=0; j<skillDetails.getLength(); j++) {
+				Node deet = skillDetails.item(j);
+				if("name".equals(deet.getNodeName())) {
+					s.name = deet.getTextContent();
+				} else if("skillgroup".equals(deet.getNodeName())){
+					String rawGroupName = deet.getTextContent();
+					rawGroupName = rawGroupName.toUpperCase();
+					rawGroupName = rawGroupName.replaceAll(" ", "");
+					if(!StringUtils.isEmpty(rawGroupName)) {
+						s.group = SkillGroupType.valueOf(rawGroupName);
+					}
+				} else if("skillcategory".equals(deet.getNodeName())) {
+					s.category = deet.getTextContent();					
+				} else if("grouped".equals(deet.getNodeName())) {
+					s.grouped = Boolean.parseBoolean(deet.getTextContent());
+				} else if("default".equals(deet.getNodeName())) {
+					s.defaulted = Boolean.parseBoolean(deet.getTextContent());
+				} else if("rating".equals(deet.getNodeName())) {
+					s.rating = Integer.parseInt(deet.getTextContent());
+				} else if("base".equals(deet.getNodeName())) {
+					s.base = Integer.parseInt(deet.getTextContent());
+				} else if("ratingmax".equals(deet.getNodeName())) {
+					s.ratingMax = Integer.parseInt(deet.getTextContent());
+				} else if("knowledge".equals(deet.getNodeName())) {
+					s.isKnowledge = Boolean.parseBoolean(deet.getTextContent());
+				} else if("exotic".equals(deet.getNodeName())) {
+					s.exotic = Boolean.parseBoolean(deet.getTextContent());
+				} else if("spec".equals(deet.getNodeName())) {
+					s.specialization = deet.getTextContent();
+				} else if("attribute".equals(deet.getNodeName())) {
+					s.uses = sr.attributes.get(AttributeType.valueOf(deet.getTextContent()));
+				} else if("source".equals(deet.getNodeName())) {
+					if(!StringUtils.isEmpty(deet.getTextContent())) {
+						src.book = Book.valueOf(deet.getTextContent());
+					}
+				} else if("page".equals(deet.getNodeName())) {
+					if(!StringUtils.isEmpty(deet.getTextContent())) {
+						src.page = Integer.parseInt(deet.getTextContent());
+					}
+				}
+			}
+			s.src = src;
+			skills.put(s.name, s);
+		}
+		return skills;
+	}
+
 	private Map<AttributeType, Attribute> parseAttributes(Document doc) throws XPathExpressionException {
 		Map<AttributeType, Attribute> attribs = new HashMap<AttributeType, Attribute>();
 		NodeList attribNL = (NodeList) xPath.compile("/character/attributes/attribute").evaluate(doc, XPathConstants.NODESET);
