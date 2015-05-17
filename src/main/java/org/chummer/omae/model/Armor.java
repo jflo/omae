@@ -12,6 +12,7 @@ public class Armor {
 	public Source source;
 	public boolean equipped;
 	public int damage;
+	public int capacity;
 	public Set<Gear> addonGear;
 	public Set<ArmorMod> mods;
 }

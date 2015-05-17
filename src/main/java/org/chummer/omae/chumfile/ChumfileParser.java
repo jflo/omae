@@ -19,6 +19,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.chummer.omae.model.Armor;
 import org.chummer.omae.model.Attribute;
 import org.chummer.omae.model.AttributeType;
 import org.chummer.omae.model.AwakenedType;
@@ -83,6 +84,49 @@ public class ChumfileParser {
 		retval.attributes = this.parseAttributes(doc);
 		retval.skills = this.parseSkills(doc, retval);
 		retval.contacts = this.parseContacts(doc);
+		retval.armor = this.parseArmor(doc);
+		return retval;
+		
+	}
+	
+	private Set<Armor> parseArmor(Document doc) throws XPathExpressionException {
+		Set<Armor> armors = new HashSet<Armor>();
+		NodeList armorsNL = (NodeList) xPath.compile("/character/armors/armor").evaluate(doc, XPathConstants.NODESET);
+		for(int i=0; i< armorsNL.getLength(); i++) {
+			Node node = armorsNL.item(i);
+			Armor a = new Armor();
+			NodeList armorDetails = node.getChildNodes();
+			for(int j=0; j<armorDetails.getLength(); j++) {
+				Node deet = armorDetails.item(j);
+				if("guid".equals(deet.getNodeName())) {
+					a.guid = deet.getTextContent();
+				} else if("name".equals(deet.getNodeName())) {
+					a.name = deet.getTextContent();
+				} else if("armor".equals(deet.getNodeName())){
+					a.armorValue = Integer.parseInt(deet.getTextContent());
+				} else if("armorcapacity".equals(deet.getNodeName())) {
+					a.capacity = Integer.parseInt(deet.getTextContent());
+				} else if("gears".equals(deet.getNodeName())) {
+					NodeList gears = deet.getChildNodes();
+					
+				}
+				a.source = parseSource(node);
+			}
+			armors.add(a);
+		}
+		return armors;
+	}
+	
+	private Source parseSource(Node node) throws XPathExpressionException {
+		Source retval = new Source();
+		String book = (String) xPath.compile("source").evaluate(node, XPathConstants.STRING);
+		String page = (String) xPath.compile("page").evaluate(node, XPathConstants.STRING);
+		if(!StringUtils.isEmpty(book)) {
+			retval.book = Book.valueOf(book);
+		}
+		if(!StringUtils.isEmpty(page)) {
+			retval.page = Integer.parseInt(page);
+		}
 		return retval;
 	}
 	
@@ -92,9 +136,9 @@ public class ChumfileParser {
 		for(int i = 0; i< contactsNL.getLength(); i++) {
 			Node node = contactsNL.item(i);
 			Contact c = new Contact();
-			NodeList attribDetails = node.getChildNodes();
-			for(int j=0; j<attribDetails.getLength(); j++) {
-				Node deet = attribDetails.item(j);
+			NodeList contactDetails = node.getChildNodes();
+			for(int j=0; j<contactDetails.getLength(); j++) {
+				Node deet = contactDetails.item(j);
 				if("name".equals(deet.getNodeName())) {
 					c.name = deet.getTextContent();
 				} else if ("role".equals(deet.getNodeName())) {

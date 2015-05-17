@@ -7,6 +7,7 @@ import java.io.File;
 import org.chummer.omae.model.Armor;
 import org.chummer.omae.model.AttributeType;
 import org.chummer.omae.model.AwakenedType;
+import org.chummer.omae.model.Book;
 import org.chummer.omae.model.Description;
 import org.chummer.omae.model.Gear;
 import org.chummer.omae.model.GearCategory;
@@ -55,12 +56,16 @@ public class ChumfileParserTest {
 		assertTrue(sr.contacts.get("Frank Sobotka").loyalty == 2);
 		
 		assertNotNull(sr.armor);
-		assertTrue(sr.armor.size() == 1);
+		assertTrue(sr.armor.size() == 2);
 		for(Armor a : sr.armor) {
-			assertTrue(a.armorValue == 9);
-			for(Gear g : a.addonGear) {
-				assertTrue("Biomonitor".equals(g.name));
-				assertTrue(GearCategory.BIOTECH.equals(g.category));
+			if("87897ed2-57d7-4bde-9445-05785bc16cac".equals(a.guid)) {
+				assertEquals(2, a.armorValue);
+				assertEquals(Book.SR5, a.source.book);
+				assertNotNull(a.addonGear);
+				for(Gear g : a.addonGear) {
+					assertTrue("Audio Enhancement".equals(g.name));
+					assertTrue(GearCategory.AUDIO_ENHANCEMENTS.equals(g.category));
+				}
 			}
 		}
 		
