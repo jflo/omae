@@ -19,6 +19,7 @@ public class Armor {
 	public List<Gear> addonGear;
 	public List<ArmorMod> mods;
 	
+	
 	public int getCurrentArmorValue() {
 		return armorValue.getValue(this, Integer.class);
 	}
@@ -27,11 +28,23 @@ public class Armor {
 		float gearTotal = 0.0f;
 		float modsTotal = 0.0f;
 		for(Gear g : addonGear) {
-			gearTotal = gearTotal + Math.abs(g.getCurrentCapacity());
+			gearTotal = gearTotal + g.getCurrentCapacity();
 		}
 		for(ArmorMod m : mods) {
-			modsTotal = modsTotal + Math.abs(m.getCurrentCapacity());
+			modsTotal = modsTotal + m.getCurrentCapacity();
 		}
 		return capacity - (gearTotal + modsTotal);
+	}
+	
+	public int getCurrentCost() {
+		int gearTotal = 0;
+		int modsTotal = 0;
+		for(Gear g : addonGear) {
+			gearTotal = gearTotal + g.getCost();
+		}
+		for(ArmorMod m : mods) {
+			modsTotal = modsTotal + m.getCost();
+		}
+		return cost + (gearTotal + modsTotal);
 	}
 }

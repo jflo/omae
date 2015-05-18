@@ -73,14 +73,15 @@ public class ChumfileParserTest {
 				}
 				assertEquals(1, a.mods.size());
 				for(ArmorMod mod : a.mods) {
-					assertEquals(200, mod.getCost());
-					assertEquals(3f, mod.getCurrentCapacity(), 0.001f);
+					//assertEquals(200, mod.getCost());
+					assertEquals(-3f, mod.getCurrentCapacity(), 0.001f);
 				}
-				assertEquals(1, a.getCurrentCapacity(), 0.001f);
+				assertEquals(7, a.getCurrentCapacity(), 0.001f);
 				
 				//test availability stacking
 				//test armor stacking
 				//test cost stacking
+				assertEquals(1300, a.getCurrentCost());
 			}
 		}
 		

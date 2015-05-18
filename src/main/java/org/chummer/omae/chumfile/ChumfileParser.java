@@ -111,6 +111,7 @@ public class ChumfileParser {
 				//TODO; just use a new expression from this node
 				a.guid = (String)xPath.compile("guid").evaluate(node, XPathConstants.STRING);
 				a.name = (String)xPath.compile("name").evaluate(node, XPathConstants.STRING);
+				a.cost = Integer.parseInt((String)xPath.compile("cost").evaluate(node, XPathConstants.STRING));
 				String spel = ChummerToSpel.translate((String)xPath.compile("armor").evaluate(node, XPathConstants.STRING));
 				Expression exp = parser.parseExpression(spel);
 				a.armorValue = exp;
@@ -139,8 +140,8 @@ public class ChumfileParser {
 		retval.rating = Integer.parseInt((String)xPath.compile("rating").evaluate(node, XPathConstants.STRING));
 		spel = ChummerToSpel.translate((String)xPath.compile("avail").evaluate(node, XPathConstants.STRING));
 		retval.availability = parser.parseExpression(spel);
-		spel = ChummerToSpel.translate((String)xPath.compile("cost").evaluate(node, XPathConstants.STRING));
-		retval.cost = parser.parseExpression(spel);
+		retval.costExpression = (String)xPath.compile("cost").evaluate(node, XPathConstants.STRING);
+		retval.source = parseSource(node);
 		return retval;
 	}
 	
