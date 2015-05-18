@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,16 +18,20 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathException;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.chummer.omae.model.Armor;
+import org.chummer.omae.model.ArmorMod;
 import org.chummer.omae.model.Attribute;
 import org.chummer.omae.model.AttributeType;
 import org.chummer.omae.model.AwakenedType;
 import org.chummer.omae.model.Book;
 import org.chummer.omae.model.Contact;
 import org.chummer.omae.model.Description;
+import org.chummer.omae.model.Gear;
+import org.chummer.omae.model.GearCategory;
 import org.chummer.omae.model.Metatype;
 import org.chummer.omae.model.Movement;
 import org.chummer.omae.model.Shadowrunner;
@@ -35,6 +41,9 @@ import org.chummer.omae.model.SocialStanding;
 import org.chummer.omae.model.Source;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.util.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -46,6 +55,7 @@ public class ChumfileParser {
 
 	private static final Logger log = LoggerFactory.getLogger(ChumfileParser.class);
 	XPath xPath =  XPathFactory.newInstance().newXPath();
+	ExpressionParser parser = new SpelExpressionParser();
 	
 	public Shadowrunner parseFile(File chumfile) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		Shadowrunner retval = new Shadowrunner();
@@ -98,25 +108,92 @@ public class ChumfileParser {
 			NodeList armorDetails = node.getChildNodes();
 			for(int j=0; j<armorDetails.getLength(); j++) {
 				Node deet = armorDetails.item(j);
-				if("guid".equals(deet.getNodeName())) {
-					a.guid = deet.getTextContent();
-				} else if("name".equals(deet.getNodeName())) {
-					a.name = deet.getTextContent();
-				} else if("armor".equals(deet.getNodeName())){
-					a.armorValue = Integer.parseInt(deet.getTextContent());
-				} else if("armorcapacity".equals(deet.getNodeName())) {
-					a.capacity = Integer.parseInt(deet.getTextContent());
-				} else if("gears".equals(deet.getNodeName())) {
-					NodeList gears = deet.getChildNodes();
-					
-				}
+				//TODO; just use a new expression from this node
+				a.guid = (String)xPath.compile("guid").evaluate(node, XPathConstants.STRING);
+				a.name = (String)xPath.compile("name").evaluate(node, XPathConstants.STRING);
+				String spel = ChummerToSpel.translate((String)xPath.compile("armor").evaluate(node, XPathConstants.STRING));
+				Expression exp = parser.parseExpression(spel);
+				a.armorValue = exp;
+				a.capacity = Integer.parseInt((String)xPath.compile("armorcapacity").evaluate(node, XPathConstants.STRING));
+				NodeList gears = ((Node)xPath.compile("gears").evaluate(node, XPathConstants.NODE)).getChildNodes();
+				a.addonGear = parseGears(gears);
 				a.source = parseSource(node);
+				NodeList mods = ((Node)xPath.compile("armormods").evaluate(node,  XPathConstants.NODE)).getChildNodes();
+				a.mods = parseArmorMods(mods, a);
 			}
 			armors.add(a);
 		}
 		return armors;
 	}
 	
+	private ArmorMod parseArmorMod(Node node) throws XPathExpressionException {
+		ArmorMod retval = new ArmorMod();
+		retval.guid = (String)xPath.compile("guid").evaluate(node, XPathConstants.STRING);
+		retval.name = (String)xPath.compile("name").evaluate(node, XPathConstants.STRING);
+		retval.category = (String)xPath.compile("category").evaluate(node, XPathConstants.STRING);
+		String spel = ChummerToSpel.translate((String)xPath.compile("armor").evaluate(node, XPathConstants.STRING));
+		retval.armor = parser.parseExpression(spel);
+		spel = ChummerToSpel.translate((String)xPath.compile("armorcapacity").evaluate(node, XPathConstants.STRING));
+		retval.capacity = parser.parseExpression(spel);
+		retval.maxRating = Integer.parseInt((String)xPath.compile("maxrating").evaluate(node, XPathConstants.STRING));
+		retval.rating = Integer.parseInt((String)xPath.compile("rating").evaluate(node, XPathConstants.STRING));
+		spel = ChummerToSpel.translate((String)xPath.compile("avail").evaluate(node, XPathConstants.STRING));
+		retval.availability = parser.parseExpression(spel);
+		spel = ChummerToSpel.translate((String)xPath.compile("cost").evaluate(node, XPathConstants.STRING));
+		retval.cost = parser.parseExpression(spel);
+		return retval;
+	}
+	
+	private List<ArmorMod> parseArmorMods(NodeList nodes, Armor a) throws XPathExpressionException {
+		List<ArmorMod> retval = new ArrayList<ArmorMod>();
+		for(int i=0; i<nodes.getLength(); i++) {
+			Node node = nodes.item(i);
+			if("armormod".equals(node.getNodeName())) {
+				ArmorMod mod = parseArmorMod(node);
+				mod.installedIn = a;
+				retval.add(mod);
+			}
+		}
+		return retval;
+	}
+	
+	private List<Gear> parseGears(NodeList gears) throws XPathExpressionException {
+		List<Gear> retval = new ArrayList<Gear>();
+		for(int i=0; i<gears.getLength(); i++) {
+			Node gearNode = gears.item(i);
+			if("gear".equals(gearNode.getNodeName())) {
+				retval.add(parseGear(gearNode));
+			}
+		}
+		return retval;
+	}
+	
+	private Gear parseGear(Node node) throws XPathExpressionException {
+		Gear retval = new Gear();
+		retval.guid = (String) xPath.compile("guid").evaluate(node, XPathConstants.STRING);
+		retval.name = (String) xPath.compile("name").evaluate(node, XPathConstants.STRING);
+		String gearCategoryName = (String) xPath.compile("category").evaluate(node, XPathConstants.STRING);
+		retval.category = GearCategory.valueOf(gearCategoryName.toUpperCase().replaceAll(" ", "_"));
+		retval.rating = Integer.parseInt((String)xPath.compile("rating").evaluate(node, XPathConstants.STRING));
+		//time to figure out expression parsing
+		String spel = ChummerToSpel.translate((String)xPath.compile("capacity").evaluate(node, XPathConstants.STRING));
+		Expression exp = parser.parseExpression(spel);
+		
+		retval.capacity = exp;
+		//retval.armorCapacity = Integer.parseInt((String)xPath.compile("armorcapacity").evaluate(node, XPathConstants.STRING));
+		retval.minRating = Integer.parseInt((String)xPath.compile("minrating").evaluate(node, XPathConstants.STRING));
+		retval.maxRating = Integer.parseInt((String)xPath.compile("maxrating").evaluate(node, XPathConstants.STRING));
+		try {
+			retval.quantity = Integer.parseInt((String)xPath.compile("quantity").evaluate(node, XPathConstants.STRING));
+		} catch(NumberFormatException nfe) {
+			//log.info("error getting quantity, it IS optional after all");
+		}
+		spel = ChummerToSpel.translate((String)xPath.compile("cost").evaluate(node, XPathConstants.STRING));
+		retval.cost = parser.parseExpression(spel);
+		
+		return retval;
+	}
+
 	private Source parseSource(Node node) throws XPathExpressionException {
 		Source retval = new Source();
 		String book = (String) xPath.compile("source").evaluate(node, XPathConstants.STRING);
@@ -139,6 +216,7 @@ public class ChumfileParser {
 			NodeList contactDetails = node.getChildNodes();
 			for(int j=0; j<contactDetails.getLength(); j++) {
 				Node deet = contactDetails.item(j);
+				//TODO; just use a new expression from this node
 				if("name".equals(deet.getNodeName())) {
 					c.name = deet.getTextContent();
 				} else if ("role".equals(deet.getNodeName())) {
@@ -166,6 +244,7 @@ public class ChumfileParser {
 			NodeList skillDetails = node.getChildNodes();
 			for(int j=0; j<skillDetails.getLength(); j++) {
 				Node deet = skillDetails.item(j);
+				//TODO; just use a new expression from this node
 				if("name".equals(deet.getNodeName())) {
 					s.name = deet.getTextContent();
 				} else if("skillgroup".equals(deet.getNodeName())){
@@ -220,6 +299,7 @@ public class ChumfileParser {
 			NodeList attribDetails = node.getChildNodes();
 			for(int j=0; j<attribDetails.getLength(); j++) {
 				Node deet = attribDetails.item(j);
+				//TODO just use a new xPath expression from the new node.
 				if("name".equals(deet.getNodeName())) {
 					a.type = AttributeType.valueOf(AttributeType.class, deet.getTextContent());
 				} else if ("metatypemin".equals(deet.getNodeName())) {

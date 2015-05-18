@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 
 import org.chummer.omae.model.Armor;
+import org.chummer.omae.model.ArmorMod;
 import org.chummer.omae.model.AttributeType;
 import org.chummer.omae.model.AwakenedType;
 import org.chummer.omae.model.Book;
@@ -18,6 +19,7 @@ import org.junit.Test;
 
 public class ChumfileParserTest {
 
+	//TODO: refactorme. break up into test cases for each subsection. especially stuff that stacks like gear and armor and cyber
 	@Test
 	public void test() {
 		ChumfileParser parser = new ChumfileParser();
@@ -59,13 +61,26 @@ public class ChumfileParserTest {
 		assertTrue(sr.armor.size() == 2);
 		for(Armor a : sr.armor) {
 			if("87897ed2-57d7-4bde-9445-05785bc16cac".equals(a.guid)) {
-				assertEquals(2, a.armorValue);
+				assertEquals(2, a.getCurrentArmorValue());
 				assertEquals(Book.SR5, a.source.book);
 				assertNotNull(a.addonGear);
+				assertEquals(1, a.addonGear.size());
 				for(Gear g : a.addonGear) {
 					assertTrue("Audio Enhancement".equals(g.name));
 					assertTrue(GearCategory.AUDIO_ENHANCEMENTS.equals(g.category));
+					assertEquals(2f, g.getCurrentCapacity(), 0.001f);
+					assertEquals(1000, g.getCost());
 				}
+				assertEquals(1, a.mods.size());
+				for(ArmorMod mod : a.mods) {
+					assertEquals(200, mod.getCost());
+					assertEquals(3f, mod.getCurrentCapacity(), 0.001f);
+				}
+				assertEquals(1, a.getCurrentCapacity(), 0.001f);
+				
+				//test availability stacking
+				//test armor stacking
+				//test cost stacking
 			}
 		}
 		
