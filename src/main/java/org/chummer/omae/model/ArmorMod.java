@@ -13,7 +13,7 @@ public class ArmorMod implements Costs, Carries {
 	public Expression capacity;
 	public int maxRating;
 	public int rating;
-	public Expression availability;
+	public Availability availability;
 	public Expression cost;
 	public Source source;
 	public boolean equipped;
@@ -29,6 +29,7 @@ public class ArmorMod implements Costs, Carries {
 			return 0.0f;
 		}
 	}
+	
 	
 	public int getCost() {
 		if(costExpression != null) {

@@ -12,6 +12,7 @@ import org.chummer.omae.model.Book;
 import org.chummer.omae.model.Description;
 import org.chummer.omae.model.Gear;
 import org.chummer.omae.model.GearCategory;
+import org.chummer.omae.model.Legality;
 import org.chummer.omae.model.Metatype;
 import org.chummer.omae.model.Movement;
 import org.chummer.omae.model.Shadowrunner;
@@ -79,8 +80,14 @@ public class ChumfileParserTest {
 				assertEquals(7, a.getCurrentCapacity(), 0.001f);
 				
 				//test availability stacking
+				assertEquals(10, a.getCurrentAvailability().getValue());
+				
+				assertEquals(Legality.LEGAL, a.getCurrentAvailability().getLegal());
+				
+				
 				//test armor stacking
-				//test cost stacking
+				//assertEquals(11, sr.getCurrentArmorValue());
+				
 				assertEquals(1300, a.getCurrentCost());
 			}
 		}

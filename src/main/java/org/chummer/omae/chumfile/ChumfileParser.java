@@ -26,6 +26,7 @@ import org.chummer.omae.model.Armor;
 import org.chummer.omae.model.ArmorMod;
 import org.chummer.omae.model.Attribute;
 import org.chummer.omae.model.AttributeType;
+import org.chummer.omae.model.Availability;
 import org.chummer.omae.model.AwakenedType;
 import org.chummer.omae.model.Book;
 import org.chummer.omae.model.Contact;
@@ -116,6 +117,7 @@ public class ChumfileParser {
 				Expression exp = parser.parseExpression(spel);
 				a.armorValue = exp;
 				a.capacity = Integer.parseInt((String)xPath.compile("armorcapacity").evaluate(node, XPathConstants.STRING));
+				a.availability = Availability.parse((String)xPath.compile("avail").evaluate(node, XPathConstants.STRING));
 				NodeList gears = ((Node)xPath.compile("gears").evaluate(node, XPathConstants.NODE)).getChildNodes();
 				a.addonGear = parseGears(gears);
 				a.source = parseSource(node);
@@ -138,8 +140,8 @@ public class ChumfileParser {
 		retval.capacity = parser.parseExpression(spel);
 		retval.maxRating = Integer.parseInt((String)xPath.compile("maxrating").evaluate(node, XPathConstants.STRING));
 		retval.rating = Integer.parseInt((String)xPath.compile("rating").evaluate(node, XPathConstants.STRING));
-		spel = ChummerToSpel.translate((String)xPath.compile("avail").evaluate(node, XPathConstants.STRING));
-		retval.availability = parser.parseExpression(spel);
+		
+		retval.availability = Availability.parse(((String)xPath.compile("avail").evaluate(node, XPathConstants.STRING)));
 		retval.costExpression = (String)xPath.compile("cost").evaluate(node, XPathConstants.STRING);
 		retval.source = parseSource(node);
 		return retval;
@@ -191,7 +193,8 @@ public class ChumfileParser {
 		}
 		spel = ChummerToSpel.translate((String)xPath.compile("cost").evaluate(node, XPathConstants.STRING));
 		retval.cost = parser.parseExpression(spel);
-		
+		spel = ChummerToSpel.translateAvailability((String)xPath.compile("avail").evaluate(node, XPathConstants.STRING));
+		retval.availability = parser.parseExpression(spel);
 		return retval;
 	}
 

@@ -28,4 +28,12 @@ public class Shadowrunner {
 	public Set<Quality> qualities;
 	public Lifestyle lifestyle;
 	public Set<Gear> inventory;
+	
+	
+	public int getCurrentArmorValue() {
+		//loop over all equipped armors and add 'em up.
+		//probably want to calculate elemental damage mods
+		//for stuff like non-conductivity
+		return 0;
+	}
 }

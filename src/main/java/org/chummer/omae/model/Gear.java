@@ -13,7 +13,7 @@ public class Gear implements Costs, Carries {
 	public int maxRating;
 	public int rating;
 	public int quantity;
-	public Availability availability;
+	public Expression availability;
 	public Expression cost;
 	public String extra;
 	public boolean bonded;
@@ -35,6 +35,10 @@ public class Gear implements Costs, Carries {
 		} else {
 			return 0;
 		}
+	}
+
+	public Availability getCurrentAvailability() {
+		return availability.getValue(this, Availability.class);
 	}
 	
 }
